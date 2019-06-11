@@ -6,44 +6,73 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import { Button, View, Text } from 'react-native';
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation'; // Version can be specified in package.json
+import loginScreen from "./src/pages/Login/LoginPage"
+import OrderScreen from "./src/pages/Order/CurrentOrders"
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-type Props = {};
-export default class App extends Component<Props> {
+class DetailsScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+const yourOrderNavigationStack = createStackNavigator(
+  {
+    Home: {
+      screen: OrderScreen,
+      navigationOptions: {
+        headerTitle: "This is the login screen",
+        headerRight: <Button
+              title="Cool"
+            />}
+          
+      },
+    Details: DetailsScreen,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  {
+    initialRouteName: 'Home',
+  }
+);
+const RootStack1 = createStackNavigator(
+  {
+    Details: DetailsScreen,
+    Home: OrderScreen,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  {
+    initialRouteName: 'Details',
+  }
+);
+
+const rootTab = createBottomTabNavigator({
+  "Your Orders": {screen: yourOrderNavigationStack
+},
+  Map: {screen: RootStack1},
+  Settings: {screen: yourOrderNavigationStack
+},
 });
+
+const appRoot = createStackNavigator({
+  Login: {screen: loginScreen},
+  mainTab: {screen: rootTab}
+},
+{
+  defaultNavigationOptions: {
+    header: null
+  }
+});
+
+const AppContainer = createAppContainer(appRoot);
+
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}
+

@@ -8,9 +8,9 @@
 
 import React from 'react';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import loginScreen from "./src/pages/Login/LoginPage"
-import OrderScreen from "./src/pages/Order/CurrentOrders"
-import DetailsScreen from "./src/pages/Order/OrderDetails"
+import loginScreen from "./src/pages/login/LoginPage"
+import OrderScreen from "./src/pages/order/CurrentOrders"
+import DetailsScreen from "./src/pages/order/OrderDetails"
 
 
 // Order navigation stack

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity } from "react-native";
 import { List, ListItem, SearchBar, colors } from "react-native-elements";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
@@ -8,7 +8,7 @@ export default class OrdersScreen extends React.Component {
     super(props);
 
     this.state = {
-    selectedIndex: 0,
+      selectedIndex: 0,
       loading: false,
       data: [],
       page: 1,
@@ -17,6 +17,10 @@ export default class OrdersScreen extends React.Component {
       refreshing: false
     };
   }
+
+  static navigationOptions = {
+    title: 'Home!',
+  };
   handleIndexChange = index => {
     console.log(`selected index: ${index}`)
     console.log(`was: ${this.state.selectedIndex}`)
@@ -86,16 +90,6 @@ export default class OrdersScreen extends React.Component {
     );
   };
 
-  renderHeader = () => {
-    return(
-        <SegmentedControlTab
-          values={["First", "Second", "Third"]}
-          selectedIndex={this.state.selectedIndex}
-          onTabPress={this.handleIndexChange}
-        />
-    )
-  };
-
   renderFooter = () => {
     if (!this.state.loading) return null;
 
@@ -114,26 +108,19 @@ export default class OrdersScreen extends React.Component {
 
   render() {
     return (
-      <View style = {{paddingHorizontal: 10}}>
-          <SegmentedControlTab
+      <View style={{ paddingHorizontal: 10 }}>
+        <SegmentedControlTab
           values={["On the way", "To Be Picekd up"]}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}
         />
-        <FlatList style = {{paddingVertical: 20}}
+        <FlatList style={{ paddingVertical: 20 }}
           data={this.state.data}
           renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.name.first} ${item.name.last}`}
-              subtitle={item.email}
-              leftAvatar={{ source: {uri: item.picture.thumbnail }}}
-              containerStyle={{ borderBottomWidth: 0 }}
-            />
+            this.renderListItem(item)
           )}
           keyExtractor={item => item.email}
           ItemSeparatorComponent={this.renderSeparator}
-        //   ListHeaderComponent={this.renderHeader}
           ListFooterComponent={this.renderFooter}
           onRefresh={this.handleRefresh}
           refreshing={this.state.refreshing}
@@ -143,20 +130,22 @@ export default class OrdersScreen extends React.Component {
       </View>
     );
   }
-}
 
-// import React from "react"
-// import {View, Text, Button} from "react-native"
-// export default class OrdersScreen extends React.Component {
-//     render() {
-//       return (
-//         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//           <Text>Home Screen</Text>
-//           <Button
-//             title="Go to Details"
-//             onPress={() => this.props.navigation.navigate('Details')}
-//           />
-//         </View>
-//       );
-//     }
-//   }
+  renderListItem(item) {
+    return (
+      <TouchableOpacity onPress={() => {
+        console.log("Pressed");
+        this.props.navigation.navigate("Details")
+      }}>
+        <ListItem
+          roundAvatar
+          title={`${item.name.first} ${item.name.last} ${item.name.last} ${item.name.last} ${item.name.last} `}
+          subtitle={`${item.email} ${item.email} ${item.email} ${item.email} ${item.email} ${item.email} `}
+          leftAvatar={{ source: { uri: item.picture.thumbnail } }}
+          containerStyle={{ borderBottomWidth: 0 }}
+
+        />
+      </TouchableOpacity>
+    )
+  }
+}

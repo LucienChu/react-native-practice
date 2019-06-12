@@ -7,39 +7,30 @@
  */
 
 import React from 'react';
-import { Button, View, Text } from 'react-native';
-import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation'; // Version can be specified in package.json
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import loginScreen from "./src/pages/Login/LoginPage"
 import OrderScreen from "./src/pages/Order/CurrentOrders"
+import DetailsScreen from "./src/pages/Order/OrderDetails"
 
 
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-      </View>
-    );
-  }
-}
-
+// Order navigation stack
 const yourOrderNavigationStack = createStackNavigator(
   {
     Home: {
       screen: OrderScreen,
       navigationOptions: {
-        headerTitle: "This is the login screen",
-        headerRight: <Button
-              title="Cool"
-            />}
-          
-      },
+        headerTitle: "Your Orders"
+      }
+
+    },
     Details: DetailsScreen,
   },
   {
     initialRouteName: 'Home',
   }
 );
+
+
 const RootStack1 = createStackNavigator(
   {
     Details: DetailsScreen,
@@ -50,23 +41,28 @@ const RootStack1 = createStackNavigator(
   }
 );
 
+// tab bars
 const rootTab = createBottomTabNavigator({
-  "Your Orders": {screen: yourOrderNavigationStack
-},
-  Map: {screen: RootStack1},
-  Settings: {screen: yourOrderNavigationStack
-},
+  "Your Orders": {
+    screen: yourOrderNavigationStack
+  },
+  Map: { screen: RootStack1 },
+  Settings: {
+    screen: yourOrderNavigationStack
+  },
 });
 
+
+// the top structure of the app
 const appRoot = createStackNavigator({
-  Login: {screen: loginScreen},
-  mainTab: {screen: rootTab}
+  Login: { screen: loginScreen },
+  mainTab: { screen: rootTab }
 },
-{
-  defaultNavigationOptions: {
-    header: null
-  }
-});
+  {
+    defaultNavigationOptions: {
+      header: null
+    }
+  });
 
 const AppContainer = createAppContainer(appRoot);
 

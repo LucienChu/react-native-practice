@@ -27,7 +27,7 @@ export class LoginPage extends Component {
                     />
 
                     <TouchableOpacity style={styles.buttoncontainer}
-                        onPress={() => this.props.navigation.navigate("Home")}>
+                        onPress={() => this.props.navigation.push("Home")}>
                         <Text style={styles.buttontext}>Login</Text>
                     </TouchableOpacity>
 

@@ -8,7 +8,7 @@ export class LoginPage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.textfields}>
-                    <TextInput style={styles.textfields}
+                    <TextInput style={styles.input}
                         placeholder="Username"
                         returnKeyType="next"
                         onSubmitEditing={() => this.passwordInput.focus}
@@ -16,7 +16,7 @@ export class LoginPage extends Component {
                         autoCorrect={false}
                     />
 
-                    <TextInput style={styles.textfields}
+                    <TextInput style={styles.input}
                         placeholder="Password"
                         returnKeyType="go"
                         secureTextEntry
@@ -33,7 +33,7 @@ export class LoginPage extends Component {
 
                     <Button
                         title="Register"
-                        color="#labc9c"
+                        color="blue"
                         onPress={() => this.props.navigation.navigate("Register")}
                     />
                 </View>
@@ -75,10 +75,10 @@ const styles = {
         height: 50,
         fontSize: 25,
         backgroundColor: "white",
-        borderColor: "#labc9c",
-        borerWidth: 1,
+        borderColor: "green",
+        borderWidth: 1,
         marginBottom: 20,
-        color: "#34495e"
+        color: "green"
     },
 
     buttoncontainer: {

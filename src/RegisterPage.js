@@ -1,6 +1,3 @@
-
-
-
 import React, { Component } from "react";
 import { View, TextInput, Text, TouchableOpacity } from "react-native";
 
@@ -62,7 +59,7 @@ const styles = {
         fontSize: 25,
         backgroundColor: "white",
         borderColor: "green",
-        borerWidth: 1,
+        borderWidth: 1,
         marginBottom: 20,
         color: "#34495e"
     },

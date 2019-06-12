@@ -17,7 +17,7 @@ const styles = {
         felx: 1,
         backgroundColor: "#ecf0f1",
         justifyContent: "center",
-        alignItems: "stretch"
+        alignItems: "center"
     },
 
     text: {

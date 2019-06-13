@@ -11,6 +11,7 @@ import { createStackNavigator, createAppContainer, createBottomTabNavigator } fr
 import loginScreen from "./src/pages/login/LoginPage"
 import OrderScreen from "./src/pages/order/CurrentOrders"
 import DetailsScreen from "./src/pages/order/OrderDetails"
+import MapScreen from "./src/pages/map/MapPage"
 
 
 // Order navigation stack
@@ -33,7 +34,7 @@ const yourOrderNavigationStack = createStackNavigator(
 
 const RootStack1 = createStackNavigator(
   {
-    Details: DetailsScreen,
+    Details: MapScreen,
     Home: OrderScreen,
   },
   {

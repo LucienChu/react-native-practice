@@ -57,3 +57,6 @@ buck-out/
 
 
 Constants/
+
+#google api key
+android/app/src/main/AndroidManifest.xml
